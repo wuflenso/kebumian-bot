@@ -1,0 +1,25 @@
+{
+  "name": "KebumianBot",
+  "version": "1.0.0",
+  "description": "A custom bot to learn bot building in Discord.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wuflenso/KebumianBot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wuflenso/KebumianBot/issues"
+  },
+  "homepage": "https://github.com/wuflenso/KebumianBot#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "discord.js": "^13.2.0-dev.1630498093.841956",
+    "dotenv": "^10.0.0"
+  }
+}
