@@ -13,6 +13,23 @@ Node 16.0.0
 2. Copy env.sample contents to a new .env file
 3. Adjust the environment variables according to your machine (ask admin for token)
 
-## How To Run in Local
+## How to Run in Local
 Run in terminal:
 ```node index.js```
+
+## How to Debug in VSCode
+Add this configuration in the launch.json
+```
+"configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Program",
+            "runtimeVersion": "16.0.0",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/index.js"
+        }
+    ]
+```
