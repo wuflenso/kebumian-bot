@@ -11,7 +11,7 @@ Node 16.0.0
 ## How to Setup
 1. Install NodeJS version 16.0.0
 2. Clone the [repository](https://github.com/wuflenso/KebumianBot)
-3. Create a new .env file with KebumianBot directory
+3. Create a new .env file within KebumianBot directory
 4. Copy env.sample contents to a new .env file
 5. Adjust the environment variables according to your machine (ask admin for token)
 
