@@ -9,9 +9,11 @@ Node 16.0.0
 - axios  => http promises
 
 ## How to Setup
-1. Create .env file with KebumianBot directory
-2. Copy env.sample contents to a new .env file
-3. Adjust the environment variables according to your machine (ask admin for token)
+1. Install NodeJS version 16.0.0
+2. Clone the [repository](https://github.com/wuflenso/KebumianBot)
+3. Create a new .env file with KebumianBot directory
+4. Copy env.sample contents to a new .env file
+5. Adjust the environment variables according to your machine (ask admin for token)
 
 ## How to Run in Local
 Run in terminal:
