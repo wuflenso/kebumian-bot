@@ -9,7 +9,7 @@ function mapRequest(input){
     deserialized.shift();
     let keyword = deserialized;
 
-    if(COMMAND_WITH_KEYWORD.includes(command) == true && keyword == null){
+    if(COMMAND_WITH_KEYWORD.includes(command) == true && keyword.length == 0){
         return `You don't specify the keyword, dumbass`;
     }
 
@@ -30,10 +30,10 @@ function mapRequest(input){
 // This function is for testing purpose only
 function buildText(input){
     let text = '';
-    for(i=0;i<input.length;i++){
+    for(i=0; i < input.length; i++){
         text += input[i];
-        if(i!=input.length-1){
-            text+=' ';
+        if(i != input.length-1){
+            text += ' ';
         }
     }
     return text;
