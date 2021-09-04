@@ -19,28 +19,14 @@ function mapRequest(input) {
         case 'p':
         case 'play':
             return 'playing ' + ytservice.searchVideo(keyword);
-        //return `you are going to play ${buildText(keyword)}`;
         case 's':
         case 'search':
             return 'searching ' + ytservice.searchVideo(keyword);
-        //return `you are searching ${buildText(keyword)}`;
         case 'stop':
             return `please stop the music!`;
         default:
             return `your command is not registered`;
     }
-}
-
-// This function is for testing purpose only
-function buildText(input) {
-    let text = '';
-    for (i = 0; i < input.length; i++) {
-        text += input[i];
-        if (i != input.length - 1) {
-            text += ' ';
-        }
-    }
-    return text;
 }
 
 module.exports = { mapRequest };
