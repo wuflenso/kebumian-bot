@@ -20,6 +20,11 @@
   "dependencies": {
     "axios": "^0.21.1",
     "discord.js": "^13.2.0-dev.1630498093.841956",
-    "dotenv": "^10.0.0"
+    "dotenv": "^10.0.0",
+    "googleapis": "^85.0.0",
+    "http": "*",
+    "open": "^8.2.1",
+    "server-destroy": "^1.0.1",
+    "url": "^0.11.0"
   }
 }
