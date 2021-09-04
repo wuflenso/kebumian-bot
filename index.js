@@ -1,13 +1,12 @@
-// Entry point of the KebumianBot
+// First Layer: Entry point of the KebumianBot
 
-require('dotenv').config(); //initialize dotenv
-const Discord = require('discord.js'); //import discord.js
+require('dotenv').config();
+const Discord = require('discord.js'); 
 const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] });
-const usecase = require('./usecase.js');
+const usecase = require('./app/usecase.js');
 
 client.on('ready', async () => {
   console.log(`Logged in as ${client.user.tag}!`);
-  //console.log(await getVideoUrl());
 });
 
 client.on('message', msg => {
@@ -16,5 +15,5 @@ client.on('message', msg => {
   }
 });
 
-//make sure this line is the last line
-client.login(process.env.CLIENT_TOKEN); //login bot using token
+// login bot using token
+client.login(process.env.CLIENT_TOKEN); 

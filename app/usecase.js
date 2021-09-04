@@ -1,4 +1,4 @@
-// Input processing and validations belong here
+// Second Layer: Input processing and validations belong here
 
 const ytservice = require('./youtube-api-service.js');
 
@@ -9,7 +9,7 @@ function mapRequest(input) {
 
     let command = deserialized[0].substring(1);
     deserialized.shift();
-    let keyword = deserialized;
+    let keyword = combineKeywords(deserialized);
 
     if (COMMAND_WITH_KEYWORD.includes(command) == true && keyword.length == 0) {
         return `You don't specify the keyword, dumbass`;
@@ -27,6 +27,20 @@ function mapRequest(input) {
         default:
             return `your command is not registered`;
     }
+}
+
+function combineKeywords(wordArray) {
+
+    let keyword = '';
+    for (i = 0; i < wordArray.length; i++) {
+        keyword += wordArray[i];
+        if (wordArray[i] == wordArray.length - 1) {
+            break;
+        }
+        keyword += ' ';
+    }
+
+    return keyword
 }
 
 module.exports = { mapRequest };

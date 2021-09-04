@@ -1,9 +1,10 @@
+// Third Layer: Youtube API V3 Service
+
 const gauth = require('./google-oauth2.js');
 const { google } = require('googleapis');
 const youtube = google.youtube('v3');
 
 async function getTopVideo(client, searchKeyword) {
-    // retrieve youtube videos
     const res = await youtube.search.list({
         q: searchKeyword,
         part: 'snippet'
