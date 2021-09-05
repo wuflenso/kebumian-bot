@@ -6,6 +6,10 @@ const gauth = require('./google-oauth2.js');
 const COMMAND_WITH_KEYWORD = ['play', 'p', 'search', 's'];
 const scopes = ['https://www.googleapis.com/auth/youtubepartner'];
 
+async function initialAuthentication(){
+    gauth.authenticate(scopes);
+}
+
 async function mapRequest(input, msgInstance) {
 
     let deserialized = input.split(' ');
@@ -18,18 +22,16 @@ async function mapRequest(input, msgInstance) {
     }
 
     if (command == 'p' || command == 'play') {
-        gauth.authenticate(scopes)
-            .then(client => ytservice.getTopVideo(client, keyword)
-                .then(videoUrl => {
-                    return msgInstance.reply(`Playing  ${videoUrl}`);
-                }))
+        ytservice.getTopVideo(gauth.oauth2Client, keyword)
+            .then(videoUrl => {
+                return msgInstance.reply(`Playing  ${videoUrl}`);
+            })
             .catch(console.error);
     } else if (command == 's' || command == 'search') {
-        gauth.authenticate(scopes)
-            .then(client => ytservice.searchVideo(client, keyword)
-                .then(videoTitles => {
-                    return msgInstance.reply(`Search Results: \n${addNewLines(videoTitles)}`);
-                }))
+        ytservice.searchVideo(gauth.oauth2Client, keyword)
+            .then(videoTitles => {
+                return msgInstance.reply(`Search Results: \n${addNewLines(videoTitles)}`);
+            })
             .catch(console.error);
     } else if (command == 'stop') {
         return msgInstance.reply(`Please stop the music!`);
@@ -66,4 +68,4 @@ function addNewLines(wordArray) {
     return keyword
 }
 
-module.exports = { mapRequest };
+module.exports = { mapRequest, initialAuthentication };

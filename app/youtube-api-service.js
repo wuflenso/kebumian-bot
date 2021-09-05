@@ -22,7 +22,7 @@ async function searchVideo(client, searchKeyword) {
     });
 
     let list = [];
-    res.data.items.forEach(item =>{
+    res.data.items.forEach(item => {
         list.push(item.snippet.title);
     });
 
