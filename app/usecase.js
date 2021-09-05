@@ -54,18 +54,19 @@ function combineKeywords(wordArray) {
     return keyword
 }
 
-function addNewLines(wordArray) {
+function addNewLines(hash) {
 
+    let videoArray = Array.from(hash);
     let keyword = '';
-    for (i = 0; i < wordArray.length; i++) {
-        keyword += wordArray[i];
-        if (wordArray[i] == wordArray.length - 1) {
+    for (i = 0; i < videoArray.length; i++) {
+        keyword += videoArray[i][0] + ' : ' + videoArray[i][1];
+        if (videoArray[i] == videoArray.length - 1) {
             break;
         }
         keyword += '\n';
     }
 
-    return keyword
+    return keyword;
 }
 
 module.exports = { mapRequest, initialAuthentication };

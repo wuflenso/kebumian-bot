@@ -21,13 +21,13 @@ async function searchVideo(client, searchKeyword) {
         maxResults: 5
     });
 
-    let list = [];
+    let hash = new Map();
     res.data.items.forEach(item => {
-        list.push(item.snippet.title);
+        hash.set(item.snippet.title,`https://www.youtube.com/watch?v=${item.id.videoId}`);
     });
 
-    console.log(list);
-    return list;
+    console.log(hash);
+    return hash;
 }
 
 module.exports = { searchVideo, getTopVideo };
