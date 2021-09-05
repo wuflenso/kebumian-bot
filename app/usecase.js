@@ -4,7 +4,7 @@ const { MessageEmbed } = require('discord.js');
 const ytservice = require('./youtube-api-service.js');
 const gauth = require('./google-oauth2.js');
 
-const COMMAND_WITH_KEYWORD = ['play', 'p', 'search', 's'];
+const commandWithKeyword = ['play', 'p', 'search', 's'];
 const scopes = ['https://www.googleapis.com/auth/youtubepartner'];
 
 async function initialAuthentication() {
@@ -18,7 +18,7 @@ async function mapRequest(input, msgInstance) {
     deserialized.shift();
     let keyword = combineKeywords(deserialized);
 
-    if (COMMAND_WITH_KEYWORD.includes(command) == true && keyword.length == 0) {
+    if (commandWithKeyword.includes(command) == true && keyword.length == 0) {
         return msgInstance.reply(`You don't specify the keyword, dumbass`);
     }
 

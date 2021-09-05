@@ -1,8 +1,8 @@
 // First Layer: Entry point of the KebumianBot
 
 require('dotenv').config();
-const Discord = require('discord.js');
-const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] });
+const discord = require('discord.js');
+const client = new discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] });
 const usecase = require('./app/usecase.js');
 
 client.on('ready', async () => {
