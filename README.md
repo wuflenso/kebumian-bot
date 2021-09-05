@@ -4,10 +4,6 @@ A custom bot to learn bot building in Discord. Current objective: Adding music-s
 ## Prerequisites
 Node 16.0.0
 
-## Modules
-- dotenv => environment variables
-- axios  => http promises
-
 ## How to Setup
 1. Install NodeJS version 16.0.0
 2. Clone the [repository](https://github.com/wuflenso/KebumianBot)
