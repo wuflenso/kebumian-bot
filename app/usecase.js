@@ -22,9 +22,9 @@ async function mapRequest(input, msgInstance) {
             .catch(console.error);
     } else if (request[0] == 's' || request[0] == 'search') {
         gauth.authenticate(scopes)
-            .then(client => ytservice.getTopVideo(client, request[1])
+            .then(client => ytservice.searchVideo(client, request[1])
                 .then(videoUrl => {
-                    return msgInstance.reply(`searching  ${videoUrl}`);
+                    return msgInstance.reply(`search ${videoUrl.toString()}`);
                 }))
             .catch(console.error);
     } else if (request[0] == 'stop') {
