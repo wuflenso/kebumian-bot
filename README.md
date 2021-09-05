@@ -1,5 +1,5 @@
 # KebumianBot
-A custom bot to learn bot building in Discord.
+A custom bot to learn bot building in Discord. Current objective: Adding music-streaming bot functionality!
 
 ## Prerequisites
 Node 16.0.0
