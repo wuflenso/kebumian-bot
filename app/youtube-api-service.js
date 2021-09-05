@@ -9,19 +9,26 @@ async function getTopVideo(client, searchKeyword) {
         q: searchKeyword,
         part: 'snippet',
         maxResults: 1
-    })
+    });
+
     console.log(`https://www.youtube.com/watch?v=${res.data.items[0].id.videoId}`);
     return `https://www.youtube.com/watch?v=${res.data.items[0].id.videoId}`;
 }
 
-async function searchVideo(searchKeyword) {
+async function searchVideo(client, searchKeyword) {
     const res = await youtube.search.list({
         q: searchKeyword,
         part: 'snippet',
         maxResults: 5
-    })
-    console.log(res.data.items);
-    return `result: ${res.data.items}`;
+    });
+
+    let list = [];
+    res.data.items.forEach(item =>{
+        list.push(item.snippet.title);
+    });
+
+    console.log(list);
+    return list;
 }
 
 module.exports = { searchVideo, getTopVideo };

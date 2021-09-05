@@ -17,20 +17,20 @@ async function mapRequest(input, msgInstance) {
         gauth.authenticate(scopes)
             .then(client => ytservice.getTopVideo(client, request[1])
                 .then(videoUrl => {
-                    return msgInstance.reply(`playing  ${videoUrl}`);
+                    return msgInstance.reply(`Playing  ${videoUrl}`);
                 }))
             .catch(console.error);
     } else if (request[0] == 's' || request[0] == 'search') {
         gauth.authenticate(scopes)
             .then(client => ytservice.searchVideo(client, request[1])
-                .then(videoUrl => {
-                    return msgInstance.reply(`search ${videoUrl.toString()}`);
+                .then(videoTitles => {
+                    return msgInstance.reply(`Search Results: \n${addNewLines(videoTitles)}`);
                 }))
             .catch(console.error);
     } else if (request[0] == 'stop') {
-        return msgInstance.reply(`please stop the music!`);
+        return msgInstance.reply(`Please stop the music!`);
     } else {
-        return msgInstance.reply(`your command is not registered`);
+        return msgInstance.reply(`Your command is not registered`);
     }
 
 }
@@ -54,6 +54,20 @@ function combineKeywords(wordArray) {
             break;
         }
         keyword += ' ';
+    }
+
+    return keyword
+}
+
+function addNewLines(wordArray) {
+
+    let keyword = '';
+    for (i = 0; i < wordArray.length; i++) {
+        keyword += wordArray[i];
+        if (wordArray[i] == wordArray.length - 1) {
+            break;
+        }
+        keyword += '\n';
     }
 
     return keyword
