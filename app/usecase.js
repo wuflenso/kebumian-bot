@@ -6,7 +6,7 @@ const gauth = require('./google-oauth2.js');
 const COMMAND_WITH_KEYWORD = ['play', 'p', 'search', 's'];
 const scopes = ['https://www.googleapis.com/auth/youtubepartner'];
 
-async function initialAuthentication(){
+async function initialAuthentication() {
     gauth.authenticate(scopes);
 }
 
@@ -30,7 +30,16 @@ async function mapRequest(input, msgInstance) {
     } else if (command == 's' || command == 'search') {
         ytservice.searchVideo(gauth.oauth2Client, keyword)
             .then(videoTitles => {
-                return msgInstance.reply(`Search Results: \n${addNewLines(videoTitles)}`);
+                /* const exampleEmbed = new MessageEmbed()
+                    .addFields(
+                        { name: 'Regular field title', value: 'Some value here' },
+                        { name: '\u200B', value: '\u200B' },
+                        { name: 'Inline field title', value: 'Some value here'},
+                        { name: 'Inline field title', value: 'Some value here'},
+                    )
+                    .setTimestamp()
+                channel.send({ embeds: [exampleEmbed] }); */
+                return msgInstance.reply(`Search Results: \n${formatHyperlink(videoTitles)}`);
             })
             .catch(console.error);
     } else if (command == 'stop') {
@@ -54,19 +63,16 @@ function combineKeywords(wordArray) {
     return keyword
 }
 
-function addNewLines(hash) {
+function formatHyperlink(hash) {
 
     let videoArray = Array.from(hash);
-    let keyword = '';
-    for (i = 0; i < videoArray.length; i++) {
-        keyword += videoArray[i][0] + ' : ' + videoArray[i][1];
-        if (videoArray[i] == videoArray.length - 1) {
-            break;
-        }
-        keyword += '\n';
-    }
 
-    return keyword;
+    array = [];
+    videoArray.forEach(item => {
+        array.push(`[${item[0]}](${item[1]})`);
+    });
+    console.log(array);
+    return array;
 }
 
 module.exports = { mapRequest, initialAuthentication };
