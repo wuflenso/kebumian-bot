@@ -1,6 +1,5 @@
 // Third Layer: Youtube API V3 Service
 
-const gauth = require('./google-oauth2.js');
 const { google } = require('googleapis');
 const youtube = google.youtube('v3');
 
