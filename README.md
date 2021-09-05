@@ -1,12 +1,8 @@
 # KebumianBot
-A custom bot to learn bot building in Discord.
+A custom bot to learn bot building in Discord. Current objective: Adding music-streaming bot functionality!
 
 ## Prerequisites
 Node 16.0.0
-
-## Modules
-- dotenv => environment variables
-- axios  => http promises
 
 ## How to Setup
 1. Install NodeJS version 16.0.0
@@ -16,8 +12,10 @@ Node 16.0.0
 5. Adjust the environment variables according to your machine (ask admin for token)
 
 ## How to Run in Local
-Run in terminal:
-```node index.js```
+Run in terminal
+```
+node index.js
+```
 
 ## How to Debug in VSCode
 Add this configuration in the launch.json
