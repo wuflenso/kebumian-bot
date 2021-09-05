@@ -16,7 +16,7 @@ Node 16.0.0
 5. Adjust the environment variables according to your machine (ask admin for token)
 
 ## How to Run in Local
-Run in terminal:
+Run in terminal
 ```node index.js```
 
 ## How to Debug in VSCode
