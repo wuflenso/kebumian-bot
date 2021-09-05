@@ -10,8 +10,9 @@ async function getTopVideo(client, searchKeyword) {
         maxResults: 1
     });
 
-    console.log(`[${res.data.items[0].snippet.title}](https://www.youtube.com/watch?v=${res.data.items[0].id.videoId})`);
-    return (`[${res.data.items[0].snippet.title}](https://www.youtube.com/watch?v=${res.data.items[0].id.videoId})`);
+    let result = (`[${res.data.items[0].snippet.title}](https://www.youtube.com/watch?v=${res.data.items[0].id.videoId})`);
+    console.log(result);
+    return result;
 }
 
 async function searchVideo(client, searchKeyword) {
@@ -23,7 +24,7 @@ async function searchVideo(client, searchKeyword) {
 
     let hash = new Map();
     res.data.items.forEach(item => {
-        hash.set(item.snippet.title,`https://www.youtube.com/watch?v=${item.id.videoId}`);
+        hash.set(item.snippet.title, `https://www.youtube.com/watch?v=${item.id.videoId}`);
     });
 
     console.log(hash);
