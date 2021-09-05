@@ -10,13 +10,14 @@ async function getTopVideo(client, searchKeyword) {
         part: 'snippet'
     })
     console.log(`https://www.youtube.com/watch?v=${res.data.items[0].id.videoId}`);
+    return `https://www.youtube.com/watch?v=${res.data.items[0].id.videoId}`;
 }
 
 // Define Scopes.
 const scopes = ['https://www.googleapis.com/auth/youtubepartner'];
 
 // Wrapper method for index.js
-function searchVideo(searchKeyword) {
+async function searchVideo(searchKeyword) {
 
     // Authenticate and run API
     gauth.authenticate(scopes)
@@ -24,4 +25,4 @@ function searchVideo(searchKeyword) {
         .catch(console.error);
 }
 
-module.exports = { searchVideo };
+module.exports = { searchVideo, getTopVideo };

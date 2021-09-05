@@ -1,7 +1,7 @@
 // First Layer: Entry point of the KebumianBot
 
 require('dotenv').config();
-const Discord = require('discord.js'); 
+const Discord = require('discord.js');
 const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] });
 const usecase = require('./app/usecase.js');
 
@@ -11,9 +11,9 @@ client.on('ready', async () => {
 
 client.on('message', msg => {
   if (msg.content[0] == '-' && msg.content.length > 1) {
-    msg.reply(usecase.mapRequest(msg.content));
+    usecase.mapRequest(msg.content, msg);
   }
 });
 
 // login bot using token
-client.login(process.env.CLIENT_TOKEN); 
+client.login(process.env.CLIENT_TOKEN);

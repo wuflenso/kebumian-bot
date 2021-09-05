@@ -1,32 +1,48 @@
 // Second Layer: Input processing and validations belong here
 
 const ytservice = require('./youtube-api-service.js');
+const gauth = require('./google-oauth2.js');
 
 const COMMAND_WITH_KEYWORD = ['play', 'p', 'search', 's'];
+const scopes = ['https://www.googleapis.com/auth/youtubepartner'];
 
-function mapRequest(input) {
+async function mapRequest(input, msgInstance) {
+    let request = manageCommands(input);
+
+    if (COMMAND_WITH_KEYWORD.includes(request[0]) == true && request[1].length == 0) {
+        return msgInstance.reply(`You don't specify the keyword, dumbass`);
+    }
+
+    if (request[0] == 'p' || request[0] == 'play') {
+        gauth.authenticate(scopes)
+            .then(client => ytservice.getTopVideo(client, request[1])
+                .then(videoUrl => {
+                    return msgInstance.reply(`playing  ${videoUrl}`);
+                }))
+            .catch(console.error);
+    } else if (request[0] == 's' || request[0] == 'search') {
+        gauth.authenticate(scopes)
+            .then(client => ytservice.getTopVideo(client, request[1])
+                .then(videoUrl => {
+                    return msgInstance.reply(`searching  ${videoUrl}`);
+                }))
+            .catch(console.error);
+    } else if (request[0] == 'stop') {
+        return msgInstance.reply(`please stop the music!`);
+    } else {
+        return msgInstance.reply(`your command is not registered`);
+    }
+
+}
+
+function manageCommands(input) {
     let deserialized = input.split(' ');
 
     let command = deserialized[0].substring(1);
     deserialized.shift();
     let keyword = combineKeywords(deserialized);
 
-    if (COMMAND_WITH_KEYWORD.includes(command) == true && keyword.length == 0) {
-        return `You don't specify the keyword, dumbass`;
-    }
-
-    switch (command) {
-        case 'p':
-        case 'play':
-            return 'playing ' + ytservice.searchVideo(keyword);
-        case 's':
-        case 'search':
-            return 'searching ' + ytservice.searchVideo(keyword);
-        case 'stop':
-            return `please stop the music!`;
-        default:
-            return `your command is not registered`;
-    }
+    return [command, keyword];
 }
 
 function combineKeywords(wordArray) {
