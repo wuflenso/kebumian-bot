@@ -1,4 +1,6 @@
-// Google Authentication using Oauth2
+/*
+ * Google Authentication using Oauth2
+ */
 
 'use strict';
 

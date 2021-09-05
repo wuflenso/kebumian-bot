@@ -1,4 +1,6 @@
-// Second Layer: Input processing and validations belong here
+/*
+ * Second Layer: Input processing and validations belong here
+ */
 
 const { MessageEmbed } = require('discord.js');
 const ytservice = require('./youtube-api-service.js');
@@ -8,11 +10,14 @@ const commandWithKeyword = ['play', 'p', 'search', 's'];
 const scopes = ['https://www.googleapis.com/auth/youtubepartner'];
 
 async function initialAuthentication() {
+
+    // authenticate google user (only) when initiating service
     gauth.authenticate(scopes);
 }
 
 async function mapRequest(input, msgInstance) {
 
+    // Process and validate input
     let deserialized = input.split(' ');
     let command = deserialized[0].substring(1);
     deserialized.shift();
@@ -22,6 +27,7 @@ async function mapRequest(input, msgInstance) {
         return msgInstance.reply(`You don't specify the keyword, dumbass`);
     }
 
+    // Map commands with corresponding actions
     if (command == 'p' || command == 'play') {
         ytservice.getTopVideo(gauth.oauth2Client, keyword)
             .then(videoUrl => {
@@ -51,6 +57,7 @@ async function mapRequest(input, msgInstance) {
 
 function combineKeywords(wordArray) {
 
+    // Combining search/play keywords
     let keyword = '';
     for (i = 0; i < wordArray.length; i++) {
         keyword += wordArray[i];
@@ -65,8 +72,8 @@ function combineKeywords(wordArray) {
 
 function formatHyperlink(hash) {
 
+    // Change {title : url} hash into [title](url) string a la markdown
     let videoArray = Array.from(hash);
-
     array = [];
     videoArray.forEach(item => {
         array.push(`[${item[0]}](${item[1]})`);
