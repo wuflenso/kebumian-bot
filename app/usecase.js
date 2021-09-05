@@ -1,5 +1,6 @@
 // Second Layer: Input processing and validations belong here
 
+const { MessageEmbed } = require('discord.js');
 const ytservice = require('./youtube-api-service.js');
 const gauth = require('./google-oauth2.js');
 
@@ -24,22 +25,21 @@ async function mapRequest(input, msgInstance) {
     if (command == 'p' || command == 'play') {
         ytservice.getTopVideo(gauth.oauth2Client, keyword)
             .then(videoUrl => {
-                return msgInstance.reply(`Playing  ${videoUrl}`);
+                const playEmbed = new MessageEmbed()
+                    .setTitle('Now Playing')
+                    .setDescription(videoUrl)
+                    .setTimestamp();
+                return msgInstance.channel.send({ embeds: [playEmbed] });
             })
             .catch(console.error);
     } else if (command == 's' || command == 'search') {
         ytservice.searchVideo(gauth.oauth2Client, keyword)
             .then(videoTitles => {
-                /* const exampleEmbed = new MessageEmbed()
-                    .addFields(
-                        { name: 'Regular field title', value: 'Some value here' },
-                        { name: '\u200B', value: '\u200B' },
-                        { name: 'Inline field title', value: 'Some value here'},
-                        { name: 'Inline field title', value: 'Some value here'},
-                    )
-                    .setTimestamp()
-                channel.send({ embeds: [exampleEmbed] }); */
-                return msgInstance.reply(`Search Results: \n${formatHyperlink(videoTitles)}`);
+                const searchEmbed = new MessageEmbed()
+                    .setTitle('Search Results')
+                    .setDescription(formatHyperlink(videoTitles))
+                    .setTimestamp();
+                return msgInstance.channel.send({ embeds: [searchEmbed] });
             })
             .catch(console.error);
     } else if (command == 'stop') {
@@ -72,7 +72,16 @@ function formatHyperlink(hash) {
         array.push(`[${item[0]}](${item[1]})`);
     });
     console.log(array);
-    return array;
+
+    result = '';
+    for (i = 0; i < array.length; i++) {
+        result += array[i];
+        if (array[i] == array.length - 1) {
+            break;
+        }
+        result += ', ';
+    }
+    return result;
 }
 
 module.exports = { mapRequest, initialAuthentication };

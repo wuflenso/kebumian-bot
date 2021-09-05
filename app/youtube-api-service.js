@@ -10,8 +10,8 @@ async function getTopVideo(client, searchKeyword) {
         maxResults: 1
     });
 
-    console.log(`https://www.youtube.com/watch?v=${res.data.items[0].id.videoId}`);
-    return `https://www.youtube.com/watch?v=${res.data.items[0].id.videoId}`;
+    console.log(`[${res.data.items[0].snippet.title}](https://www.youtube.com/watch?v=${res.data.items[0].id.videoId})`);
+    return (`[${res.data.items[0].snippet.title}](https://www.youtube.com/watch?v=${res.data.items[0].id.videoId})`);
 }
 
 async function searchVideo(client, searchKeyword) {
