@@ -17,7 +17,9 @@ Node 16.0.0
 
 ## How to Run in Local
 Run in terminal
-```node index.js```
+```
+node index.js
+```
 
 ## How to Debug in VSCode
 Add this configuration in the launch.json
