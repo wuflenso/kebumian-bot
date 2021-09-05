@@ -18,7 +18,6 @@
   },
   "homepage": "https://github.com/wuflenso/KebumianBot#readme",
   "dependencies": {
-    "axios": "^0.21.1",
     "discord.js": "^13.2.0-dev.1630498093.841956",
     "dotenv": "^10.0.0",
     "googleapis": "^85.0.0",
