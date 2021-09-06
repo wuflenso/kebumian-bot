@@ -2,7 +2,7 @@
  * Second Layer: Input processing and validations belong here
  */
 
-const { MessageEmbed } = require('discord.js');
+const discordEmbeds = require('./discord-embed-template.js');
 const ytservice = require('./youtube-api-service.js');
 const gauth = require('./google-oauth2.js');
 
@@ -31,21 +31,13 @@ async function mapRequest(input, msgInstance) {
     if (command == 'p' || command == 'play') {
         ytservice.getTopVideo(gauth.oauth2Client, keyword)
             .then(videoUrl => {
-                const playEmbed = new MessageEmbed()
-                    .setTitle('Now Playing')
-                    .setDescription(videoUrl)
-                    .setTimestamp();
-                return msgInstance.channel.send({ embeds: [playEmbed] });
+                return msgInstance.channel.send({ embeds: [discordEmbeds.playEmbed(videoUrl)] });
             })
             .catch(console.error);
     } else if (command == 's' || command == 'search') {
         ytservice.searchVideo(gauth.oauth2Client, keyword)
             .then(videoTitles => {
-                const searchEmbed = new MessageEmbed()
-                    .setTitle('Search Results')
-                    .setDescription(formatHyperlink(videoTitles))
-                    .setTimestamp();
-                return msgInstance.channel.send({ embeds: [searchEmbed] });
+                return msgInstance.channel.send({ embeds: [discordEmbeds.searchEmbed(formatHyperlink(videoTitles))] });
             })
             .catch(console.error);
     } else if (command == 'stop') {
@@ -86,7 +78,7 @@ function formatHyperlink(hash) {
         if (array[i] == array.length - 1) {
             break;
         }
-        result += ', ';
+        result += '\n';
     }
     return result;
 }
